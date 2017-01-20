@@ -6,6 +6,22 @@ compile 'com.github.florent37:easyfirebase:1.0.0'
 
 # Google Login
 
+## Start Login
+
+```java
+easyFirebaseAuth.signInWithGoogle((Activity)this)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(firebaseUser -> {
+                    //user is connected
+                    final String id = firebaseUser.getUid();
+                    final String name = firebaseUser.getDisplayName();
+                    final String email = firebaseUser.getEmail();
+                    final String photoUrl = firebaseUser.getPhotoUrl().toString();
+                    //update your UI
+                });
+```
+
 ## Initialize
 
 ```java
@@ -38,22 +54,6 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     easyFirebaseAuth.onActivityResult(requestCode, data);
 }
-```
-
-## Start Login
-
-```java
-easyFirebaseAuth.signInWithGoogle((Activity)this)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .subscribe(firebaseUser -> {
-                    //user is connected
-                    final String id = firebaseUser.getUid();
-                    final String name = firebaseUser.getDisplayName();
-                    final String email = firebaseUser.getEmail();
-                    final String photoUrl = firebaseUser.getPhotoUrl().toString();
-                    //update your UI
-                });
 ```
 
 # Database
